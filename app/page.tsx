@@ -1,5 +1,5 @@
 'use client'
-import { useState } from "react";
+import { ReactElement, useState } from "react";
 const URL = `http://localhost:3000`
 
 export default function Home() {
@@ -14,7 +14,7 @@ export default function Home() {
     <main className="p-24">
       <h1 className="text-3xl mb-12">Link Shortener</h1>
       <div className="">
-        <form onSubmit={handleShortenLink}>
+        <form onSubmit={handleShortenLink()}>
           <label htmlFor="url" className="block mb-2">URL</label>
           <input className="text-black p-2 rounded mr-2" type="url" name="link" id="link" pattern="https?://.*" placeholder="https://www.google.com" required />
           <button className="p-2 bg-white hover:bg-[#efefef] transition-colors text-black rounded" type="submit">Short link!</button>
@@ -28,7 +28,9 @@ export default function Home() {
             ? <h2 className=" text-2xl">Link found!</h2>
             : <h2 className=" text-2xl">Link created!</h2>
           }
-          <a href={shortLink.newURL} className=" text-cyan-800 underline hover:text-cyan-900 dark:text-cyan-400 dark:hover:text-cyan-500 ">{shortLink.newURL}</a>
+          <Link href={shortLink.newURL}>
+            {shortLink.newURL}
+          </Link>
         </hgroup>
         <CopyButton shortLink={shortLink} />
       </div>
@@ -46,6 +48,15 @@ export default function Home() {
     };
   }
 }
+function Link({ href, children }: {
+  href: string,
+  children: ReactElement | string
+}) {
+  return <a href={href} className=" text-cyan-800 underline hover:text-cyan-900 dark:text-cyan-400 dark:hover:text-cyan-500 ">
+    {children}
+  </a>;
+}
+
 function CopyButton({ shortLink }: { shortLink: any }) {
   const [copied, setCopied] = useState(false)
   return <button onClick={() => {
@@ -53,7 +64,6 @@ function CopyButton({ shortLink }: { shortLink: any }) {
     setCopied(true)
 
     setTimeout(() => {
-
       setCopied(false)
     }, 2000)
   }}>
