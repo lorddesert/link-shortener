@@ -1,5 +1,6 @@
 'use client'
 import { ReactElement, useState } from "react";
+import { Link } from "@/app/components/Link";
 const URL = `http://localhost:3000`
 
 export default function Home() {
@@ -47,14 +48,6 @@ export default function Home() {
       e.target.reset();
     };
   }
-}
-function Link({ href, children }: {
-  href: string,
-  children: ReactElement | string
-}) {
-  return <a href={href} className=" text-cyan-800 underline hover:text-cyan-900 dark:text-cyan-400 dark:hover:text-cyan-500 ">
-    {children}
-  </a>;
 }
 
 function CopyButton({ shortLink }: { shortLink: any }) {
