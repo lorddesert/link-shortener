@@ -8,10 +8,10 @@ export async function GET(request: Request) {
   const shortenLinkAlreadyExists = allLinks[originalURL]
 
   if (shortenLinkAlreadyExists)
-    return Response.json({ originalURL, newURL: shortenLinkAlreadyExists })
+    return Response.json({ originalURL, newURL: shortenLinkAlreadyExists, alreadyExists: true })
 
   const newShortenLink = await shortenLink(originalURL, allLinks)
-  return Response.json({ originalURL, newURL: newShortenLink })
+  return Response.json({ originalURL, newURL: newShortenLink, alreadyExists: false })
 }
 
 
