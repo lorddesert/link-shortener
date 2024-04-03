@@ -14,10 +14,5 @@ export default async function Page({ params }: { params: { link: string } }) {
   const [originalLink] = await getShortLink(params.link)
 
   redirect(originalLink)
-  // return (
-  //   <div>
-  //     <h2>Your shorten link is : <a className="hover:underline text-blue-400" href={originalLink}>{shortenLink}</a></h2>
-  //     <h3>Original Link: <a className="hover:underline text-blue-400" href={originalLink}>{ originalLink }</a></h3>
-  //   </div>
-  // )
+
 }
