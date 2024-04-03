@@ -5,7 +5,6 @@ import { CopyButton } from "@/app/components/CopyButton";
 const URL = `http://localhost:3000`
 
 export default function Home() {
-  const message = ""
   const [shortLink, setShortLink] = useState({
     originalURL: '',
     newURL: '',
