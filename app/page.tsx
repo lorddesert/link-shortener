@@ -64,8 +64,14 @@ function ShortenLinkForm({ setShortLink }: { setShortLink: any }) {
   return <>
     <form onSubmit={handleShortenLink} className="grid sm:grid-cols-[1fr_auto] items-end gap-3">
       <div className="grid">
-        <label htmlFor="url" className="block mb-2">URL</label>
-        <input className="text-black p-2 rounded" type="url" name="link" id="link" pattern="https?://.*" placeholder="https://www.google.com" required />
+        <label className="block mb-2 text-center text-md opacity-60" htmlFor="url">URL</label>
+        <input className="text-black p-2 rounded bg-slate-50 dark:bg-gray-900 border-2 border-gray-400 dark:border-gray-800 dark:text-slate-50"
+          type="url"
+          name="link"
+          id="link"
+          pattern="https?://.*"
+          placeholder="https://www.google.com"
+          required />
       </div>
       <button className=" bg-white hover:bg-slate-300 transition-colors text-black rounded p-2" type="submit">Short link!</button>
     </form>
