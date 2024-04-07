@@ -1,10 +1,11 @@
 'use client'
 import { useState } from "react";
+import { formatURL } from "../lib/utils";
 
-export function CopyButton({ URL }: { URL: string }) {
+export function CopyButton({ shortKey }: { shortKey: string }) {
   const [copied, setCopied] = useState(false)
   return <button onClick={() => {
-    navigator.clipboard.writeText(URL);
+    navigator.clipboard.writeText(formatURL({ shortKey }));
     setCopied(true)
 
     setTimeout(() => {
