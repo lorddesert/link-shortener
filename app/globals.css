@@ -5,19 +5,35 @@
 :root {
   --foreground: #000;
   --background: #ffe2d5;
+  --background-2: #fcefe9;
+  --highlight: #3b1a82;
+  --highlight2: #36576b;
   /* --background: #ff5f45; */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground: #f4ecf5;
-    --background: #18043c;
+    --background: #323335;
+    --background-2: #07050c;
+    --highlight: #ffe2d5;
+    --highlight2: #fcefe9;
+    /* --foreground: #f4ecf5;
+    --background: #0a0711;
+    --background-2: #07050c;
+    --highlight: #ffe2d5;
+    --highlight2: #fcefe9; */
   }
 }
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  /* background-color: linear-gradient(to bottom, var(--background), var(--background-2)) no-repeat; */
+  
+  background-color: #323335;
+  background-image: url("../public/dot.svg");
+  background-repeat: repeat space;
+  height: 100vh;
 }
 
 @layer utilities {

@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import { Link } from "@/app/components/Link";
 import { CopyButton } from "@/app/components/CopyButton";
 import { SHORTEN_LINK_INITIAL_STATE, formatURL } from "./lib/utils";
@@ -14,7 +14,10 @@ export default function Home() {
 
   return (
     <main className="p-24 max-w-4xl mx-auto">
-      <h1 className="text-3xl mb-12">Link Shortener</h1>
+      <div className="flex justify-center">
+        <h1 className="text-6xl mb-12 text-center font-bold bg-gradient-to-r from-[var(--highlight)] to-[var(--highlight2)] text-transparent bg-clip-text inline-block mx-auto">L<span className="opacity-40">inq</span>RL</h1>
+      </div>
+      <p className=" text-lg text-center opacity-70">Convenient, Open-Source link shortener made by <Link href="https://www.lorddesert.xyz">@lorddesert</Link> </p>
       <ShortenLinkForm setShortLink={setShortLink} />
       {shortLink.originalURL && NewLinkCard(shortLink)}
     </main>
@@ -23,7 +26,7 @@ export default function Home() {
 
 function NewLinkCard(shortLink: { originalURL: string; shortKey: string; alreadyExists: undefined; }): React.ReactNode {
   return <div className={`flex gap-4 px-2 py-1 bg-slate-100 dark:bg-violet-950  rounded mt-10 border-l-8 max-w-lg w-fit
-        ${shortLink.alreadyExists ? 'border-blue-600' : 'border-teal-700'}
+        ${shortLink.alreadyExists ? 'border-blue-600' : 'border-teal-600'}
       `}>
     <hgroup className="">
       {shortLink.alreadyExists
@@ -46,10 +49,10 @@ function ShortenLinkForm({ setShortLink }: { setShortLink: any }) {
       e.preventDefault();
       setShortLink(SHORTEN_LINK_INITIAL_STATE)
       setIsSubmitting(true)
-  
+
       const res = await fetch(`/shorten?link=${e.target[0].value}`)
       const data = await res.json()
-      
+
       console.log(data)
       setShortLink(data);
       setIsSubmitting(false)
@@ -57,7 +60,7 @@ function ShortenLinkForm({ setShortLink }: { setShortLink: any }) {
     } catch (error) {
       setIsSubmitting(false)
 
-     console.log(error) 
+      console.log(error)
     }
   }
 
@@ -73,9 +76,18 @@ function ShortenLinkForm({ setShortLink }: { setShortLink: any }) {
           placeholder="https://www.google.com"
           required />
       </div>
-      <button className=" bg-white hover:bg-slate-300 transition-colors text-black rounded p-2" type="submit">Short link!</button>
+      <Button>Create a link</Button>
     </form>
 
     {isSubmitting && <Loader />}
   </>
 }
+
+export function Button({ children }: {
+  children: ReactNode
+}) {
+  return <button className=" bg-white transition-all text-black rounded p-2 border-2 border-inherit border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-slate-100 dark:hover:bg-opacity-75 dark:hover:border-opacity-75" type="submit">
+    {children}
+  </button>;
+}
+
