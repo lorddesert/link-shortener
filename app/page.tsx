@@ -83,10 +83,10 @@ function ShortenLinkForm({ setShortLink }: { setShortLink: any }) {
   </>
 }
 
-export function Button({ children }: {
+export function Button({ children, ...restOfProps }: {
   children: ReactNode
 }) {
-  return <button className=" bg-white transition-all text-black rounded p-2 border-2 border-inherit border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-slate-100 dark:hover:bg-opacity-75 dark:hover:border-opacity-75" type="submit">
+  return <button {...restOfProps} className=" p-2 h-full border-gray-500 border bg-zinc-900 rounded-lg">
     {children}
   </button>;
 }
