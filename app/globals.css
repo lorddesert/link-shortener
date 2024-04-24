@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@font-face {
+  font-family: "Poppins";
+  src: url('/public/fonts/Poppins-Regular.ttf');
+}
+
+@font-face {
+  font-family: "Poppins-Medium";
+  src: url('/public/fonts/Poppins-Medium.ttf');
+}
+
+@font-face {
+  font-family: "Poppins-Bold";
+  src: url('/public/fonts/Poppins-Bold.ttf');
+}
+
 :root {
   --foreground: #000;
   --background: #ffe2d5;
@@ -27,9 +43,8 @@
 }
 
 body {
-  color: var(--foreground);
+  color: white;
   /* background-color: linear-gradient(to bottom, var(--background), var(--background-2)) no-repeat; */
-  
   background-color: #323335;
   background-image: url("../public/dot.svg");
   background-repeat: repeat space;
