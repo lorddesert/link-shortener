@@ -1,9 +1,16 @@
 'use client'
 import React, { ReactNode, useState } from "react";
-import { Link } from "@/app/components/Link";
-import { CopyButton } from "@/app/components/CopyButton";
-import { SHORTEN_LINK_INITIAL_STATE, formatURL } from "./lib/utils";
-import Loader from "./components/Loader";
+import { ShortenLinkForm } from "./components/ShortenLinkForm";
+import { MOCK_ITEMS } from "./lib/utils";
+import { Button } from "./components/Button";
+
+function IsBeingDevWrapper({ children, className }: { children: ReactNode, className?: string }) {
+  return (
+    <div className={`${className} border-4 border-rose-900 p-5 rounded-lg bg-rose-950 before:[content:'Work_in_progress'] before:mb-3 before:block`}>
+      {children}
+    </div>
+  )
+}
 
 export default function Home() {
   const [shortLink, setShortLink] = useState({
@@ -13,82 +20,49 @@ export default function Home() {
   })
 
   return (
-    <main className="p-24 max-w-4xl mx-auto">
+    <main className="p-10 md:p-20 max-w-4xl mx-auto font-poppins-regular">
       <div className="flex justify-center">
-        <h1 className="text-6xl mb-12 text-center font-bold bg-gradient-to-r from-[var(--highlight)] to-[var(--highlight2)] text-transparent bg-clip-text inline-block mx-auto">L<span className="opacity-40">inq</span>RL</h1>
+        {/* <h1 className="text-6xl mb-12 text-center font-bold bg-gradient-to-r from-[var(--highlight)] to-[var(--highlight2)] text-transparent bg-clip-text inline-block mx-auto">L<span className="opacity-40">inq</span>RL</h1> */}
+        <h1 className="text-5xl mb-32 font-bold">Linq</h1>
       </div>
-      <p className=" text-lg text-center opacity-70">Convenient, Open-Source link shortener made by <Link href="https://www.lorddesert.xyz">@lorddesert</Link> </p>
-      <ShortenLinkForm setShortLink={setShortLink} />
-      {shortLink.originalURL && NewLinkCard(shortLink)}
+      <h2 className="text-2xl text-balance text-center font-semi-bold mb-4">The Simplest URL Shortener You Were Wainting For</h2>
+      <ShortenLinkForm setShortLink={setShortLink} shortLink={shortLink} />
+      {/* {shortLink.originalURL && NewLinkCard(shortLink)} */}
+      <section className="last-ten-links-created mt-4">
+        <IsBeingDevWrapper className="w-max">
+          <ul className="grid gap-4 max-w-md ">
+            {MOCK_ITEMS.map(item => {
+              return (
+                <li key={`link-${item.id}`} className=" grid items-center grid-cols-[auto,1fr,auto,auto] rounded-lg gap-4 w-full bg-zinc-800 border border-gray-500 p-2 ">
+                  <div className="rounded-full w-10 h-10 bg-slate-500"></div>
+                  <a href="https://www.google.com" className="underline hover:text-slate-300 max-w-md truncate">
+                    DescripcionDescripcionDescripcionDescripcionDescripcionDescripcionDescripcionDescripcion Descripcion Descripcion DescripcionDescripcionDescripcion
+                  </a>
+
+                  <div className="flex gap-1">
+                    <GhostButton>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
+                    </GhostButton>
+
+                    {/* <GhostButton>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-ellipsis"><circle cx="12" cy="12" r="1" /><circle cx="19" cy="12" r="1" /><circle cx="5" cy="12" r="1" /></svg>
+                    </GhostButton> */}
+                  </div>
+                </li>
+              )
+            }
+            )}
+          </ul>
+        </IsBeingDevWrapper>
+      </section>
     </main>
   );
 }
 
-function NewLinkCard(shortLink: { originalURL: string; shortKey: string; alreadyExists: undefined; }): React.ReactNode {
-  return <div className={`flex gap-4 px-2 py-1 bg-slate-100 dark:bg-violet-950  rounded mt-10 border-l-8 max-w-lg w-fit
-        ${shortLink.alreadyExists ? 'border-blue-600' : 'border-teal-600'}
-      `}>
-    <hgroup className="">
-      {shortLink.alreadyExists
-        ? <h2 className=" text-2xl">Link found!</h2>
-        : <h2 className=" text-2xl">Link created!</h2>}
-      <Link href={`/shorten/${shortLink.shortKey}`}>
-        {`${window.location.origin}/shorten/${shortLink.shortKey}`}
-      </Link>
-    </hgroup>
-    <CopyButton shortKey={shortLink.shortKey} />
-  </div>;
+function GhostButton({ children }: { children: ReactNode }) {
+  return (
+    <Button variant="ghost" className="hover:bg-red-500 hover:bg-opacity-60" >
+      {children}
+    </Button>
+  )
 }
-
-function ShortenLinkForm({ setShortLink }: { setShortLink: any }) {
-  'use client'
-  const [isSubmitting, setIsSubmitting] = useState(false)
-
-  async function handleShortenLink(e: any) {
-    try {
-      e.preventDefault();
-      setShortLink(SHORTEN_LINK_INITIAL_STATE)
-      setIsSubmitting(true)
-
-      const res = await fetch(`/shorten?link=${e.target[0].value}`)
-      const data = await res.json()
-
-      console.log(data)
-      setShortLink(data);
-      setIsSubmitting(false)
-      e.target.reset();
-    } catch (error) {
-      setIsSubmitting(false)
-
-      console.log(error)
-    }
-  }
-
-  return <>
-    <form onSubmit={handleShortenLink} className="grid sm:grid-cols-[1fr_auto] items-end gap-3">
-      <div className="grid">
-        <label className="block mb-2 text-center text-md opacity-60" htmlFor="url">URL</label>
-        <input className="text-black p-2 rounded bg-slate-50 dark:bg-gray-900 border-2 border-gray-400 dark:border-gray-800 dark:text-slate-50"
-          type="url"
-          name="link"
-          id="link"
-          pattern="https?://.*"
-          placeholder="https://www.google.com"
-          required />
-      </div>
-      <Button>Create a link</Button>
-    </form>
-
-    {isSubmitting && <Loader />}
-  </>
-}
-
-export function Button({ children, className: cn = "", ...restOfProps }: {
-  children: ReactNode,
-  className?: string
-}) {
-  return <button {...restOfProps} className={` p-2 border-gray-500 border bg-zinc-900 rounded-lg, ${cn}`}>
-    {children}
-  </button>;
-}
-
