@@ -6,11 +6,13 @@ I think the idea being building something that you can actually use, like in you
 
 - [x] Add pending state when submitting.
 - [?] Add a click/used count field on link DB model. Last used?
-- [ ] Elaborate design? xD.
-- [ ] Auth for matching links with users.
-- [ ] Connect Supabase.
-- [ ] Store data in supabase.
-
+- [x] Elaborate design? xD.
+- [x] Auth for matching links with users.
+- [x] Connect Supabase.
+- [x] Store data in supabase.
+- [?] Retrieve 10 last links and display them in the home page.
+- [?] Make a server route to get the 10 last link creations.
+- [?] Change Title and favicon of the app.
 ## Possible changes
 - [?] Add the option to let the user create his own short keys.
   * User would enter the short key, check on DB if short key EXISTS ONLY IN HIS ACCOUNT.
