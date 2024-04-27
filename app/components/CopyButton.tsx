@@ -1,11 +1,19 @@
 'use client'
 import { useState } from "react";
 import { formatURL } from "../lib/utils";
+import { Button } from "./Button";
 
-export function CopyButton({ shortKey, className: cn }: { shortKey: string, className?: string }) {
+export function CopyButton({
+  shortKey,
+  className: cn
+}: {
+  shortKey: string,
+  className?: string
+}) {
   const [copied, setCopied] = useState(false)
-  return <button
+  return <Button
     type="button"
+    variant="ghost"
     disabled={!shortKey}
     className={`border-gray-500 border bg-zinc-900 rounded-lg h-full p-2 disabled:bg-zinc-700 disabled:text-zinc-300 disabled:cursor-not-allowed ${cn}`}
     onClick={() => {
@@ -25,5 +33,5 @@ export function CopyButton({ shortKey, className: cn }: { shortKey: string, clas
         <span className="flex-1">Copy</span>
       </div>
     }
-  </button>;
+  </Button>;
 }
