@@ -1,8 +1,9 @@
 import { initializeSupabaseClient } from "./initializeSupabaseClient"
 
+
 export const SHORTEN_LINK_INITIAL_STATE = {
   originalURL: '',
-  newURL: '',
+  shortKey: '',
   alreadyExists: undefined
 }
 
@@ -17,7 +18,9 @@ export interface ILink {
 export function formatURL({ shortKey }: {
   shortKey: string
 }) {
-  return `${window.location.origin}/shorten/${shortKey}`
+  const inDevEnvironment = !!process && process.env.NODE_ENV === 'development';
+
+  return `${inDevEnvironment ? 'http://localhost:3000' : `${process.env.PROJECT_URL}` }/shorten/${shortKey}`
 }
 
 export async function generateShortKey() {
@@ -36,11 +39,12 @@ export async function generateShortKey() {
  * Creates a new shorten links and returns the new short key
  * @returns 
  */
-export async function shortenLink({ originalURL }: {
+export async function shortenLink({ originalURL, shortKey }: {
   originalURL: string,
+  shortKey?: string
 }) {
   const client = initializeSupabaseClient()
-  const newShortKey = await generateShortKey()
+  const newShortKey = shortKey || await generateShortKey()
 
   await client.from('links').insert({
     clickCount: 0,
@@ -50,6 +54,15 @@ export async function shortenLink({ originalURL }: {
   })
 
   return newShortKey
+}
+
+export interface ILinkItem {
+  id: number;
+  createdAt: string;
+  clickCount: number;
+  lastTimeUsed: string;
+  originalURL: string;
+  shortKey: string;
 }
 
 export const MOCK_ITEMS = [
