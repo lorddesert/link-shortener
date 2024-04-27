@@ -1,22 +1,28 @@
-import { readFile, writeFile } from "fs/promises"
-import { cwd } from "process"
 import { initializeSupabaseClient } from "../lib/initializeSupabaseClient"
-import { ILink, generateShortKey, shortenLink } from "../lib/utils"
-export async function GET(request: Request) {
+import { ILink, ILinkItem, shortenLink } from "../lib/utils"
+import { verifyShortKeyAlreadyExists } from "../actions"
+export async function POST(request: Request) {
   const client = initializeSupabaseClient()
-  const originalURL = new URL(request.url).searchParams.get('link')!
+  const {
+    shortKey,
+    originalURL
+  }: {
+    shortKey: string,
+    originalURL: string
+  } = await request.json()
 
-  const { data }: {
-    data: any
-  } = await client.from('links').select('*').eq('originalURL', originalURL)
+  // const { data: linkData }: {
+  //   data: any
+  // } = await client.from('links').select('*').eq('originalURL', originalURL)
+  // const linkAlreadyExist = linkData && linkData.length
 
-  if (!data || !data?.length) {
-    console.log("OK 404: Data was falsy!")
-    const newShortKey = await shortenLink({ originalURL })
-    return Response.json({ originalURL, shortKey: `${newShortKey}`, alreadyExists: false })
-  }
+  if (await verifyShortKeyAlreadyExists({ shortKey }))
+    return Response.json({ originalURL, shortKey: `${shortKey}`, alreadyExists: true })
 
-  console.log("OK 200: Link found!")
-  const { shortKey } = data[0]
-  return Response.json({ originalURL, shortKey: `${shortKey}`, alreadyExists: true })
+  await shortenLink({
+    originalURL,
+    shortKey
+  })
+  
+  return Response.json({ originalURL, shortKey, alreadyExists: false })
 }
