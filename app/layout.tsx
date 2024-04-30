@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "sonner";
+import { ShortenLinkForm } from "./components/ShortenLinkForm";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +18,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <main className="p-10 md:p-20 max-w-4xl mx-auto font-poppins-regular">
+          <Toaster position="top-center" />
+          <div className="flex justify-center">
+            <h1 className="text-5xl mb-32 font-bold">Linq</h1>
+          </div>
+          <h2 className="text-2xl text-balance text-center font-semi-bold mb-4">The Simplest URL Shortener You Were Wainting For</h2>
+          <ShortenLinkForm />
+          {children}
+        </main>
+      </body>
     </html>
   );
 }
