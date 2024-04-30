@@ -22,6 +22,9 @@ I think the idea being building something that you can actually use, like in you
 - [?] If I want to make it personal use only or not, I can provide a special auth code or key that goes into the form that is used on the app when creating a new link.
 
 
+## Short link form
+[?] Takes time, put a loader state.
+
 ### Comments or possible changes /0_0/
 
 * Change structure for links:
