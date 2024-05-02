@@ -1,7 +1,7 @@
-import { initializeSupabaseClient } from "../../../../lib/initializeSupabaseClient"
+import { initializeSupabaseClient } from "@/app/actions"
 
 export async function GET() {
-  const db = initializeSupabaseClient()
+  const db = await initializeSupabaseClient()
   const data = await db.from('links').select('*').order('createdAt', {
     ascending: false
   })
