@@ -1,6 +1,8 @@
 import { initializeSupabaseClient } from "./initializeSupabaseClient"
 
 
+export const MOCK_SHORTKEY = "GOOGLEMASX10tenMILasdasdasd asd asd asd asas"
+
 export const SHORTEN_LINK_INITIAL_STATE = {
   originalURL: '',
   shortKey: '',
