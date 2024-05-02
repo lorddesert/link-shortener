@@ -1,5 +1,5 @@
 'use client'
-import { ILinkItem, formatURL } from "../lib/utils";
+import { ILinkItem, MOCK_SHORTKEY, formatURL } from "../lib/utils";
 import { Button } from "./Button";
 import { handleDeleteLink } from "../actions";
 import { toast } from "sonner";
@@ -25,11 +25,11 @@ export function LinkItem({ link }: { link: ILinkItem }) {
   }
 
   return (
-    <li className="flex items-center rounded-lg gap-8 bg-zinc-800 border border-gray-500 px-6 py-4 text-sm ">
+    <li className=" min-w-fit max-w-sm flex items-center justify-between rounded-lg gap-8 bg-zinc-800 border border-gray-500 px-6 py-4 text-sm ">
       <hgroup className="flex gap-5 items-center">
         <div>
           <a href={shortenedLink} className="underline hover:text-slate-300">
-            <h2 className="">{link.shortKey}</h2>
+            <h2 className="truncate max-w-[15ch]">{link.shortKey || MOCK_SHORTKEY}</h2>
           </a>
           <h2 className="opacity-50 max-w-xs truncate">{link.originalURL}</h2>
         </div>
