@@ -22,7 +22,7 @@ export default async function Home() {
       </div>
       <h2 className="text-2xl text-balance text-center font-semi-bold mb-4">The Simplest URL Shortener You Were Wainting For</h2>
       <ShortenLinkForm />
-      <div className="last-ten-links-created mt-4">
+      <div className="mt-4">
         <IsBeingDevWrapper>
           <ul className="grid grid-cols-1 place-items-center md:grid-cols-2 gap-4 ">
             {MOCK_ITEMS.map((link: any) => (
