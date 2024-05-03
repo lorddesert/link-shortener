@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 
-@font-face {
+/* @font-face {
   font-family: "Poppins";
   src: url('/public/fonts/Poppins-Regular.ttf');
 }
@@ -16,7 +16,7 @@
 @font-face {
   font-family: "Poppins-Bold";
   src: url('/public/fonts/Poppins-Bold.ttf');
-}
+} */
 
 :root {
   --foreground: #000;
