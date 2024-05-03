@@ -1,27 +1,9 @@
-'use client'
-import { ILinkItem, MOCK_SHORTKEY, formatURL } from "../lib/utils";
-import { handleDeleteLink } from "../actions";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { ILinkItem, MOCK_SHORTKEY } from "../lib/utils";
+import { formatURL } from "../actions";
 import { CopyLinkButton } from "./CopyLinkButton";
 
-export function LinkItem({ link }: { link: ILinkItem }) {
-  //TODO: It should show the shorkey as the the title, the originalURL as the subtitle?? maybe just a CTA saying copy original URL? xD IDK
-  //clicakbe h1 that redirects to original URL
-  // copy button doesnt work
-  // finish design
-  // try different layouts
-  // const formatter = new Intl.DateTimeFormat('en-US', { dateStyle: 'short' })
-  const shortenedLink = formatURL({ shortKey: link.shortKey })
-  const router = useRouter()
-
-  async function handleDelete() {
-    await handleDeleteLink({ link })
-
-    router.refresh()
-
-    toast('Link deleted!')
-  }
+export async function LinkItem({ link }: { link: ILinkItem }) {
+  const shortenedLink = await formatURL({ shortKey: link.shortKey })
 
   return (
     // <li className=" min-w-fit max-w-sm flex items-center justify-between rounded-lg gap-8 bg-zinc-800 border border-gray-500 px-6 py-4 text-sm ">
