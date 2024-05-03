@@ -17,14 +17,6 @@ export interface ILink {
   shortKey: string
 }
 
-export function formatURL({ shortKey }: {
-  shortKey: string
-}) {
-  const inDevEnvironment = process && process.env.NODE_ENV === 'development';
-
-  return `${inDevEnvironment ? 'http://localhost:3000' : `${process.env.BASE_URL}` }/shorten/${shortKey}`
-}
-
 export async function generateShortKey() {
   const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
   const keyLength = 6 // Why 6?F

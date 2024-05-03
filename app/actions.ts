@@ -36,3 +36,11 @@ export async function getAllLinks() {
   }
   return await response.json()
 }
+
+export async function formatURL({ shortKey }: {
+  shortKey: string
+}) {
+  const inDevEnvironment = process && process.env.NODE_ENV === 'development';
+
+  return `${inDevEnvironment ? 'http://localhost:3000' : `${process.env.BASE_URL}` }/shorten/${shortKey}`
+}
