@@ -14,7 +14,7 @@ Create sort of lorddesert.xyz/links ??
 I think the idea being building something that you can actually use, like in your daily basis. Try building it for you and then deliver it as may like?
 
 
-
+- [?] Re design the loader?
 - [x] Add pending state when submitting.
 - [?] Add a click/used count field on link DB model. Last used?
 - [x] Elaborate design? xD.
