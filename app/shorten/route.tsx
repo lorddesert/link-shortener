@@ -1,8 +1,6 @@
-import { initializeSupabaseClient } from "../lib/initializeSupabaseClient"
-import { ILink, ILinkItem, shortenLink } from "../lib/utils"
+import { shortenLink } from "../lib/utils"
 import { verifyShortKeyAlreadyExists } from "../actions"
 export async function POST(request: Request) {
-  const client = initializeSupabaseClient()
   const {
     shortKey,
     originalURL
