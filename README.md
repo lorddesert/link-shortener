@@ -1,5 +1,12 @@
 # Link shortener..
 
+Create sort of lorddesert.xyz/links ??
+
+
+
+* lordlinks.vercel.app
+* linq.vercel.app <- try this
+
 I think the idea being building something that you can actually use, like in your daily basis. Try building it for you and then deliver it as may like?
 
 
