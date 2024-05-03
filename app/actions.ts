@@ -27,7 +27,7 @@ export async function handleDeleteLink({ link }: { link: ILinkItem }) {
 
 export async function getAllLinks() {
 
-  //! JUST DEV!
+  // ! JUST DEV!
   // return MOCK_ITEMS
   const response = await fetch(`http://localhost:3000/api/links/get/all`, { cache: 'no-store' })
   if (!response.ok) {
