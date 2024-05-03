@@ -1,9 +1,9 @@
-import { initializeSupabaseClient } from "@/app/lib/initializeSupabaseClient"
+import { initializeSupabaseClient } from "@/app/actions"
 import { redirect } from "next/navigation"
 
 
 async function getOriginalURL(shortKey: string) {
-  const client = initializeSupabaseClient()
+  const client = await initializeSupabaseClient()
 
   const { data } = await client.from('links').update({ lastTimeUsed: new Date() } ).eq('shortKey', shortKey).select()
   if (!data) return "/404"
