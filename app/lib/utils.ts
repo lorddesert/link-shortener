@@ -1,4 +1,4 @@
-import { initializeSupabaseClient } from "./initializeSupabaseClient"
+import { initializeSupabaseClient } from "../actions"
 
 
 export const MOCK_SHORTKEY = "GOOGLEMASX10tenMILasdasdasd asd asd asd asas"
@@ -45,7 +45,7 @@ export async function shortenLink({ originalURL, shortKey }: {
   originalURL: string,
   shortKey?: string
 }) {
-  const client = initializeSupabaseClient()
+  const client = await initializeSupabaseClient()
   const newShortKey = shortKey || await generateShortKey()
 
   await client.from('links').insert({
