@@ -114,6 +114,20 @@ export function ShortenLinkForm() {
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
         </Button>
       </div>
+      {/* //TODO: implement auth for deleting? */}
+      {/* <div className="flex relative gap-2 p-2 py-3 rounded-lg border border-gray-500  outline-none focus-within:border-gray-200 hover:cursor-text bg-zinc-900 max-h-[50px] ">
+      <svg className=" mx-2 text-blue-600" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <input
+          className="flex-1 rounded-lg outline-none  placeholder-zinc-500 bg-transparent"
+          type="text" 
+          name="auth" 
+          id="auth"
+          placeholder="Auth"
+        />
+        <Button className="border-0 transition-colors hover:bg-zinc-700 focus:bg-zinc-700 absolute right-1 h-min top-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
+        </Button>
+      </div> */}
     </form>
 
     {isSubmitting && <Loader />}
