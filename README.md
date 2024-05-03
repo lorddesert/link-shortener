@@ -1,5 +1,9 @@
 # Link shortener..
 
+
+
+## Bugs
+* Font doesn't load properly
 Create sort of lorddesert.xyz/links ??
 
 
