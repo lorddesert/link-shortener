@@ -1,27 +1,18 @@
 'use client'
 
 import { useState } from "react";
-import { SHORTEN_LINK_INITIAL_STATE, generateShortKey } from "../lib/utils";
-import { verifyShortKeyAlreadyExists, formatURL } from '@/app/actions'
+import { generateShortKey } from "../lib/utils";
+import { verifyShortKeyAlreadyExists, formatURL, revalidateData } from '@/app/actions'
 
 // Components
 import { Button } from "./Button";
 import Loader from "./Loader";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 import { CopyLinkButton } from "./CopyLinkButton";
 
 export function ShortenLinkForm() {
-  const [shortLink, setShortLink] = useState({
-    originalURL: '',
-    shortKey: '',
-    alreadyExists: undefined
-  })
   const [newShortenedLink, setNewShortenedLink] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
-
-  const router = useRouter()
-
   async function handleShortenLink(formData: FormData) {
     try {
       const originalURL = formData.get('link') as string
@@ -47,12 +38,9 @@ export function ShortenLinkForm() {
       const newshortLink = await res.json()
 
       setNewShortenedLink(await formatURL({ shortKey: newshortLink.shortKey}))
-      setShortLink(SHORTEN_LINK_INITIAL_STATE)
-      setShortLink(newshortLink)
       setIsSubmitting(false)
       toast.success('Link shortened successfully!')
-      router.refresh()
-
+      revalidateData()
     } catch (error) {
       setIsSubmitting(false)
 

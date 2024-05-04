@@ -2,6 +2,7 @@
 
 import { createClient } from '@supabase/supabase-js'
 import { ILinkItem, MOCK_ITEMS } from './lib/utils'
+import { revalidateTag } from 'next/cache'
 
 const supabaseUrl = 'https://jowtcsoardnhxsudbsmz.supabase.co'
 const IN_DEV_ENV = process.env.NODE_ENV === 'development'
@@ -30,7 +31,7 @@ export async function getAllLinks() {
 
   // ! JUST DEV!
   // return MOCK_ITEMS
-  const response = await fetch(`${IN_DEV_ENV ? "http://localhost:3000" : process.env.BASE_URL}/api/links/get/all`, { cache: 'no-store' })
+  const response = await fetch(`${IN_DEV_ENV ? "http://localhost:3000" : process.env.BASE_URL}/api/links/get/all`, { next: { tags: ['links']}, cache: 'no-store'})
   if (!response.ok) {
     //TODO: handle error 500
   }
@@ -43,4 +44,9 @@ export async function formatURL({ shortKey }: {
   const inDevEnvironment = process && process.env.NODE_ENV === 'development';
 
   return `${inDevEnvironment ? 'http://localhost:3000' : `${process.env.BASE_URL}` }/shorten/${shortKey}`
+}
+
+
+export async function revalidateData() {
+  revalidateTag('links')
 }
