@@ -1,5 +1,7 @@
 'use client'
 import { useState } from "react"
+
+// Components
 import { Button } from "./Button"
 
 export function CopyLinkButton({ shortenedLink, className }: { shortenedLink: string, className?: string }) {

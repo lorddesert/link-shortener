@@ -1,5 +1,7 @@
 import { ILinkItem, MOCK_SHORTKEY } from "../lib/utils";
 import { formatURL } from "../actions";
+
+// Components
 import { CopyLinkButton } from "./CopyLinkButton";
 
 export async function LinkItem({ link }: { link: ILinkItem }) {
