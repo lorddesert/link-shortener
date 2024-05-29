@@ -12,8 +12,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  allLinks
 }: Readonly<{
   children: React.ReactNode;
+  allLinks: React.ReactNode;
 }>) {
   return (
     <html lang="en">
@@ -25,7 +27,8 @@ export default function RootLayout({
               <span>linq</span>
             </h1>
           </header>
-          {children}
+          { children }
+          { allLinks }
         </main>
       </body>
     </html>
