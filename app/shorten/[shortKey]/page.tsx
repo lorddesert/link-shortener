@@ -6,9 +6,17 @@ async function getOriginalURL(shortKey: string) {
   const client = await initializeSupabaseClient()
 
   const { data, error } = await client.from('links').update({ lastTimeUsed: new Date() } ).eq('shortKey', shortKey).select()
-  if (error || !data.length) return "/404"
+  console.log({error, data})
 
-  return data[0].originalURL
+  if (error) {
+    //TODO: do something with the error
+  }
+
+  if (data?.length) {
+    return data[0].originalURL
+  }
+
+  return "/404"
 }
 
 export default async function Page({ params }: { params: { shortKey: string } }) {
