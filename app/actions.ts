@@ -7,7 +7,7 @@ import { revalidateTag } from 'next/cache'
 const IN_DEV_ENV = process.env.NODE_ENV === 'development'
 
 export async function initializeSupabaseClient() {
-  return createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_API_KEY!)
+  return createClient(process.env.SUPABASE_PROJECT_URL!, process.env.SUPABASE_API_KEY!)
 }
 
 export async function verifyShortKeyAlreadyExists({ shortKey }: { shortKey: string }) {
