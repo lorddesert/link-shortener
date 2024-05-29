@@ -1,14 +1,13 @@
 "use server"
 
 import { createClient } from '@supabase/supabase-js'
-import { ILinkItem, MOCK_ITEMS } from './lib/utils'
+import { ILinkItem } from './lib/utils'
 import { revalidateTag } from 'next/cache'
 
-const supabaseUrl = 'https://jowtcsoardnhxsudbsmz.supabase.co'
 const IN_DEV_ENV = process.env.NODE_ENV === 'development'
 
 export async function initializeSupabaseClient() {
-  return createClient(supabaseUrl, process.env.SUPABASE_API_KEY!)
+  return createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_API_KEY!)
 }
 
 export async function verifyShortKeyAlreadyExists({ shortKey }: { shortKey: string }) {
@@ -32,9 +31,11 @@ export async function getAllLinks() {
   // ! JUST DEV!
   // return MOCK_ITEMS
   const response = await fetch(`${IN_DEV_ENV ? "http://localhost:3000" : process.env.BASE_URL}/api/links/get/all`, { next: { tags: ['links']}, cache: 'no-store'})
+
   if (!response.ok) {
     //TODO: handle error 500
   }
+
   return await response.json()
 }
 
