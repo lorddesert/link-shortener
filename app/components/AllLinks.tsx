@@ -4,7 +4,7 @@ import { ILinkItem } from "../lib/utils"
 // Components
 import { LinkItem } from "./LinkItem"
 export async function AllLinks() {
-  const allLinks = await getAllLinks()  
+  const allLinks = await getAllLinks()
   
   return (
     <div className="mt-4">
